@@ -13,7 +13,7 @@ using Ude;
 
 namespace EncodingChecker
 {
-    public partial class MainForm : Form
+    public partial class MainForm : MetroFramework.Forms.MetroForm
     {
         private sealed class WorkerArgs
         {
@@ -65,6 +65,7 @@ namespace EncodingChecker
                     continue;
                 object value = charsetConstant.GetValue(null);
                 lstValidCharsets.Items.Add(value);
+                cboDestinationEncode.Items.Add(value);
             }
 
             //Set the initial action for the action buttons in their Tag properties
@@ -376,5 +377,33 @@ namespace EncodingChecker
             return builder.ToString();
         }
 
+        private void btnSelectDestination_Click(object sender, EventArgs e) {
+            dlgBrowseDirectories.SelectedPath = txtDestination.Text;
+            if (dlgBrowseDirectories.ShowDialog(this) == DialogResult.OK)
+                txtDestination.Text = dlgBrowseDirectories.SelectedPath;
+
+        }
+
+        private void btnConvertSelection_Click(object sender, EventArgs e) {
+
+            var dstCharset = Encoding.GetEncoding(cboDestinationEncode.SelectedItem.ToString());
+
+            foreach (ListViewItem item in lstResults.SelectedItems) {
+                var srcCharset = Encoding.GetEncoding(item.SubItems[0].Text);
+                var srcFileName = item.SubItems[1].Text;
+                var srcDirectoryName = item.SubItems[2].Text;
+                var srcFullName = Path.Combine(srcDirectoryName, srcFileName);
+                var dstFullName = srcFullName;
+                var srcContent = File.ReadAllText(Path.Combine(srcDirectoryName, srcFileName), srcCharset);
+
+                File.WriteAllText(dstFullName, srcContent, dstCharset);
+
+            }
+
+        }
+
+        private void lstResults_MouseDoubleClick(object sender, MouseEventArgs e) {
+            new FileView().loadFile(Path.Combine(lstResults.SelectedItems[0].su))
+        }
     }
 }

@@ -50,6 +50,12 @@
             this.btnView = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.btnSelectDestination = new MetroFramework.Controls.MetroButton();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.btnConvertSelection = new MetroFramework.Controls.MetroButton();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.cboDestinationEncode = new MetroFramework.Controls.MetroComboBox();
+            this.txtDestination = new System.Windows.Forms.TextBox();
             lblBaseDirectory = new System.Windows.Forms.Label();
             lblFileMasks = new System.Windows.Forms.Label();
             lblValidCharsets = new System.Windows.Forms.Label();
@@ -62,7 +68,7 @@
             // lblBaseDirectory
             // 
             lblBaseDirectory.AutoSize = true;
-            lblBaseDirectory.Location = new System.Drawing.Point(10, 10);
+            lblBaseDirectory.Location = new System.Drawing.Point(10, 60);
             lblBaseDirectory.Name = "lblBaseDirectory";
             lblBaseDirectory.Size = new System.Drawing.Size(98, 13);
             lblBaseDirectory.TabIndex = 0;
@@ -71,7 +77,7 @@
             // lblFileMasks
             // 
             lblFileMasks.AutoSize = true;
-            lblFileMasks.Location = new System.Drawing.Point(10, 59);
+            lblFileMasks.Location = new System.Drawing.Point(13, 110);
             lblFileMasks.Name = "lblFileMasks";
             lblFileMasks.Size = new System.Drawing.Size(149, 13);
             lblFileMasks.TabIndex = 4;
@@ -80,7 +86,7 @@
             // lblValidCharsets
             // 
             lblValidCharsets.AutoSize = true;
-            lblValidCharsets.Location = new System.Drawing.Point(220, 59);
+            lblValidCharsets.Location = new System.Drawing.Point(223, 110);
             lblValidCharsets.Name = "lblValidCharsets";
             lblValidCharsets.Size = new System.Drawing.Size(133, 13);
             lblValidCharsets.TabIndex = 6;
@@ -105,15 +111,17 @@
             // 
             this.txtBaseDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBaseDirectory.Location = new System.Drawing.Point(10, 28);
+            this.txtBaseDirectory.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtBaseDirectory.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
+            this.txtBaseDirectory.Location = new System.Drawing.Point(13, 79);
             this.txtBaseDirectory.Name = "txtBaseDirectory";
-            this.txtBaseDirectory.Size = new System.Drawing.Size(480, 21);
+            this.txtBaseDirectory.Size = new System.Drawing.Size(865, 21);
             this.txtBaseDirectory.TabIndex = 1;
             // 
             // btnBrowseDirectories
             // 
             this.btnBrowseDirectories.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowseDirectories.Location = new System.Drawing.Point(500, 28);
+            this.btnBrowseDirectories.Location = new System.Drawing.Point(888, 79);
             this.btnBrowseDirectories.Name = "btnBrowseDirectories";
             this.btnBrowseDirectories.Size = new System.Drawing.Size(30, 21);
             this.btnBrowseDirectories.TabIndex = 2;
@@ -125,7 +133,7 @@
             // 
             this.chkIncludeSubdirectories.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkIncludeSubdirectories.AutoSize = true;
-            this.chkIncludeSubdirectories.Location = new System.Drawing.Point(540, 30);
+            this.chkIncludeSubdirectories.Location = new System.Drawing.Point(928, 81);
             this.chkIncludeSubdirectories.Name = "chkIncludeSubdirectories";
             this.chkIncludeSubdirectories.Size = new System.Drawing.Size(135, 17);
             this.chkIncludeSubdirectories.TabIndex = 3;
@@ -135,7 +143,7 @@
             // txtFileMasks
             // 
             this.txtFileMasks.AcceptsReturn = true;
-            this.txtFileMasks.Location = new System.Drawing.Point(10, 77);
+            this.txtFileMasks.Location = new System.Drawing.Point(13, 128);
             this.txtFileMasks.Multiline = true;
             this.txtFileMasks.Name = "txtFileMasks";
             this.txtFileMasks.Size = new System.Drawing.Size(200, 100);
@@ -146,14 +154,14 @@
             // 
             this.lstValidCharsets.CheckOnClick = true;
             this.lstValidCharsets.FormattingEnabled = true;
-            this.lstValidCharsets.Location = new System.Drawing.Point(220, 77);
+            this.lstValidCharsets.Location = new System.Drawing.Point(223, 128);
             this.lstValidCharsets.Name = "lstValidCharsets";
             this.lstValidCharsets.Size = new System.Drawing.Size(200, 100);
             this.lstValidCharsets.TabIndex = 7;
             // 
             // btnValidate
             // 
-            this.btnValidate.Location = new System.Drawing.Point(430, 126);
+            this.btnValidate.Location = new System.Drawing.Point(433, 177);
             this.btnValidate.Name = "btnValidate";
             this.btnValidate.Size = new System.Drawing.Size(75, 23);
             this.btnValidate.TabIndex = 8;
@@ -163,7 +171,7 @@
             // 
             // btnAbout
             // 
-            this.btnAbout.Location = new System.Drawing.Point(430, 154);
+            this.btnAbout.Location = new System.Drawing.Point(433, 205);
             this.btnAbout.Name = "btnAbout";
             this.btnAbout.Size = new System.Drawing.Size(75, 23);
             this.btnAbout.TabIndex = 10;
@@ -182,14 +190,15 @@
             colDirectory});
             this.lstResults.FullRowSelect = true;
             this.lstResults.GridLines = true;
-            this.lstResults.Location = new System.Drawing.Point(10, 187);
+            this.lstResults.Location = new System.Drawing.Point(10, 293);
             this.lstResults.Name = "lstResults";
-            this.lstResults.Size = new System.Drawing.Size(680, 300);
+            this.lstResults.Size = new System.Drawing.Size(1065, 313);
             this.lstResults.TabIndex = 9;
             this.lstResults.UseCompatibleStateImageBehavior = false;
             this.lstResults.View = System.Windows.Forms.View.Details;
             this.lstResults.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lstResults_KeyDown);
             this.lstResults.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lstResults_KeyUp);
+            this.lstResults.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lstResults_MouseDoubleClick);
             // 
             // dlgBrowseDirectories
             // 
@@ -219,7 +228,7 @@
             // 
             // btnView
             // 
-            this.btnView.Location = new System.Drawing.Point(430, 97);
+            this.btnView.Location = new System.Drawing.Point(433, 148);
             this.btnView.Name = "btnView";
             this.btnView.Size = new System.Drawing.Size(75, 23);
             this.btnView.TabIndex = 13;
@@ -229,7 +238,7 @@
             // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(511, 154);
+            this.btnExport.Location = new System.Drawing.Point(514, 205);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(75, 23);
             this.btnExport.TabIndex = 14;
@@ -241,11 +250,72 @@
             // 
             this.saveFileDialog1.Filter = "CSV|*.csv";
             // 
+            // btnSelectDestination
+            // 
+            this.btnSelectDestination.Location = new System.Drawing.Point(433, 255);
+            this.btnSelectDestination.Name = "btnSelectDestination";
+            this.btnSelectDestination.Size = new System.Drawing.Size(30, 23);
+            this.btnSelectDestination.TabIndex = 15;
+            this.btnSelectDestination.Text = "...";
+            this.btnSelectDestination.Click += new System.EventHandler(this.btnSelectDestination_Click);
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.Location = new System.Drawing.Point(13, 235);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(130, 19);
+            this.metroLabel1.TabIndex = 17;
+            this.metroLabel1.Text = "Convert to Directory";
+            // 
+            // btnConvertSelection
+            // 
+            this.btnConvertSelection.Location = new System.Drawing.Point(702, 258);
+            this.btnConvertSelection.Name = "btnConvertSelection";
+            this.btnConvertSelection.Size = new System.Drawing.Size(145, 29);
+            this.btnConvertSelection.TabIndex = 18;
+            this.btnConvertSelection.Text = "&Convert Selected Files";
+            this.btnConvertSelection.Click += new System.EventHandler(this.btnConvertSelection_Click);
+            // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.Location = new System.Drawing.Point(469, 235);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(148, 19);
+            this.metroLabel2.TabIndex = 19;
+            this.metroLabel2.Text = "Select new character set";
+            // 
+            // cboDestinationEncode
+            // 
+            this.cboDestinationEncode.FormattingEnabled = true;
+            this.cboDestinationEncode.ItemHeight = 23;
+            this.cboDestinationEncode.Location = new System.Drawing.Point(470, 258);
+            this.cboDestinationEncode.Name = "cboDestinationEncode";
+            this.cboDestinationEncode.Size = new System.Drawing.Size(226, 29);
+            this.cboDestinationEncode.TabIndex = 20;
+            // 
+            // txtDestination
+            // 
+            this.txtDestination.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDestination.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtDestination.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
+            this.txtDestination.Location = new System.Drawing.Point(13, 255);
+            this.txtDestination.Name = "txtDestination";
+            this.txtDestination.Size = new System.Drawing.Size(414, 21);
+            this.txtDestination.TabIndex = 1;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(700, 519);
+            this.ClientSize = new System.Drawing.Size(1085, 638);
+            this.Controls.Add(this.cboDestinationEncode);
+            this.Controls.Add(this.metroLabel2);
+            this.Controls.Add(this.btnConvertSelection);
+            this.Controls.Add(this.metroLabel1);
+            this.Controls.Add(this.btnSelectDestination);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.btnView);
             this.Controls.Add(this.statusBar);
@@ -258,6 +328,7 @@
             this.Controls.Add(lblFileMasks);
             this.Controls.Add(this.chkIncludeSubdirectories);
             this.Controls.Add(this.btnBrowseDirectories);
+            this.Controls.Add(this.txtDestination);
             this.Controls.Add(this.txtBaseDirectory);
             this.Controls.Add(lblBaseDirectory);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -291,6 +362,12 @@
         private System.Windows.Forms.Button btnView;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private MetroFramework.Controls.MetroButton btnSelectDestination;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
+        private MetroFramework.Controls.MetroButton btnConvertSelection;
+        private MetroFramework.Controls.MetroLabel metroLabel2;
+        private MetroFramework.Controls.MetroComboBox cboDestinationEncode;
+        private System.Windows.Forms.TextBox txtDestination;
     }
 }
 
