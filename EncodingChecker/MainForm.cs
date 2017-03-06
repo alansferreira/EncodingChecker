@@ -8,7 +8,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-
+using MetroFramework;
+using MetroFramework.Forms;
 using Ude;
 
 namespace EncodingChecker
@@ -209,6 +210,9 @@ namespace EncodingChecker
                 _actionWorker.CancelAsync();
             }
         }
+
+        private const string Unknown = "(Unknown)";
+
         #endregion
 
         #region Background worker event handlers and helper methods
@@ -252,7 +256,7 @@ namespace EncodingChecker
 
                 int percentageCompleted = (i * 100) / allFiles.Length;
                 WorkerProgress progress = new WorkerProgress();
-                progress.Charset = detector.Charset ?? "(Unknown)";
+                progress.Charset = detector.Charset ?? Unknown;
                 progress.FileName = fileName;
                 progress.DirectoryName = directoryName;
                 worker.ReportProgress(percentageCompleted, progress);
@@ -386,10 +390,21 @@ namespace EncodingChecker
 
         private void btnConvertSelection_Click(object sender, EventArgs e) {
 
-            var dstCharset = Encoding.GetEncoding(cboDestinationEncode.SelectedItem.ToString());
+            var resp = MetroMessageBox.Show(this, "This action can´t will generate an backup of selected files on the root selected folder! \n Do you want to continue with this action?", "Converting files character set", MessageBoxButtons.YesNo);
+            if (resp != DialogResult.Yes) return;
 
+            var dstCharset = Charsets.GetEncoding(cboDestinationEncode.SelectedItem.ToString());
+            var parentBasePath = new DirectoryInfo(txtBaseDirectory.Text).Parent;
+            var zipFileName = Path.Combine(parentBasePath.FullName, DateTime.Now.ToString("yyyy-MM-dd HHmmss")+ ".zip");
+
+            MetroMessageBox.Show(this, string.Format("Right!, Your backup file wil be saved on \"{0}\"", zipFileName), "Converting files character set", MessageBoxButtons.OK);
+            
+            var fz = new ICSharpCode.SharpZipLib.Zip.FastZip();
+            fz.CreateZip(zipFileName, txtBaseDirectory.Text, true, null);
+            
             foreach (ListViewItem item in lstResults.SelectedItems) {
-                var srcCharset = Encoding.GetEncoding(item.SubItems[0].Text);
+                var srcCharset = Charsets.GetEncoding(item.SubItems[0].Text);
+
                 var srcFileName = item.SubItems[1].Text;
                 var srcDirectoryName = item.SubItems[2].Text;
                 var srcFullName = Path.Combine(srcDirectoryName, srcFileName);
@@ -400,10 +415,16 @@ namespace EncodingChecker
 
             }
 
+            MetroMessageBox.Show(this, "The selected files has ben converted!\n You have refresh view to see changes", "Right!");
+
         }
 
         private void lstResults_MouseDoubleClick(object sender, MouseEventArgs e) {
-            new FileView().loadFile(Path.Combine(lstResults.SelectedItems[0].su))
+            var selectedItem = lstResults.SelectedItems[0];
+            var view = new FileView();
+            view.loadFile(Path.Combine(selectedItem.SubItems[2].Text, selectedItem.SubItems[1].Text), selectedItem.SubItems[0].Text);
+            view.Show();
+
         }
     }
 }

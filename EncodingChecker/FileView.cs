@@ -9,18 +9,19 @@ using Ude;
 
 namespace EncodingChecker {
     public partial class FileView : MetroFramework.Forms.MetroForm {
+        private const string Unknown = "(Unknown)";
+
         public FileView() {
             InitializeComponent();
         }
-        public void loadFile(string fileName, string encode) {
-            if (string.IsNullOrEmpty(encode)) {
-                txtContent.Text = System.IO.File.ReadAllText(fileName);
-            } else {
-                txtContent.Text = System.IO.File.ReadAllText(fileName, Encoding.GetEncoding(encode));
-            }
+        public void loadFile(string fileName, string encodingName) {
+            var encoding = Charsets.GetEncoding(encodingName);
+            txtContent.Text = System.IO.File.ReadAllText(fileName, encoding);
+
+            lnkFileName.Text = fileName;
         }
         private void lnkFileName_Click(object sender, EventArgs e) {
-            System.Diagnostics.Process.Start("explorer.exe /select, \""+ lnkFileName.Text +"\"");
+            System.Diagnostics.Process.Start("explorer.exe", "/select, \""+ lnkFileName.Text +"\"");
         }
     }
 }

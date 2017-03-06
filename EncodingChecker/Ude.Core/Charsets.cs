@@ -36,6 +36,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 using System;
+using System.Text;
 
 namespace Ude
 {
@@ -146,6 +147,22 @@ namespace Ude
         /// Thai. This recognizer is not enabled yet. 
         /// </summary>
         public const string TIS620 = "TIS620";
-        
+
+
+        public static Encoding GetEncoding(string name) {
+            try {
+                return Encoding.GetEncoding(name);
+            } catch (Exception) {}
+
+            try {
+                return Encoding.GetEncoding(name.Replace("-", "_"));
+            } catch (Exception) {}
+
+            try {
+                return Encoding.GetEncoding(name.Replace("-", ""));
+            } catch (Exception) { }
+
+            return Encoding.Default;
+        }
     }
 }

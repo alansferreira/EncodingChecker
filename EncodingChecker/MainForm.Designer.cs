@@ -50,12 +50,9 @@
             this.btnView = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.btnSelectDestination = new MetroFramework.Controls.MetroButton();
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.btnConvertSelection = new MetroFramework.Controls.MetroButton();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.cboDestinationEncode = new MetroFramework.Controls.MetroComboBox();
-            this.txtDestination = new System.Windows.Forms.TextBox();
             lblBaseDirectory = new System.Windows.Forms.Label();
             lblFileMasks = new System.Windows.Forms.Label();
             lblValidCharsets = new System.Windows.Forms.Label();
@@ -206,12 +203,16 @@
             // 
             // statusBar
             // 
+            this.statusBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.statusBar.AutoSize = false;
+            this.statusBar.Dock = System.Windows.Forms.DockStyle.None;
             this.statusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.actionProgress,
             this.actionStatus});
-            this.statusBar.Location = new System.Drawing.Point(0, 497);
+            this.statusBar.Location = new System.Drawing.Point(10, 609);
             this.statusBar.Name = "statusBar";
-            this.statusBar.Size = new System.Drawing.Size(700, 22);
+            this.statusBar.Size = new System.Drawing.Size(1053, 22);
             this.statusBar.TabIndex = 12;
             this.statusBar.Visible = false;
             // 
@@ -250,37 +251,20 @@
             // 
             this.saveFileDialog1.Filter = "CSV|*.csv";
             // 
-            // btnSelectDestination
-            // 
-            this.btnSelectDestination.Location = new System.Drawing.Point(433, 255);
-            this.btnSelectDestination.Name = "btnSelectDestination";
-            this.btnSelectDestination.Size = new System.Drawing.Size(30, 23);
-            this.btnSelectDestination.TabIndex = 15;
-            this.btnSelectDestination.Text = "...";
-            this.btnSelectDestination.Click += new System.EventHandler(this.btnSelectDestination_Click);
-            // 
-            // metroLabel1
-            // 
-            this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(13, 235);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(130, 19);
-            this.metroLabel1.TabIndex = 17;
-            this.metroLabel1.Text = "Convert to Directory";
-            // 
             // btnConvertSelection
             // 
-            this.btnConvertSelection.Location = new System.Drawing.Point(702, 258);
+            this.btnConvertSelection.Location = new System.Drawing.Point(249, 254);
             this.btnConvertSelection.Name = "btnConvertSelection";
             this.btnConvertSelection.Size = new System.Drawing.Size(145, 29);
             this.btnConvertSelection.TabIndex = 18;
             this.btnConvertSelection.Text = "&Convert Selected Files";
+            this.btnConvertSelection.UseSelectable = true;
             this.btnConvertSelection.Click += new System.EventHandler(this.btnConvertSelection_Click);
             // 
             // metroLabel2
             // 
             this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(469, 235);
+            this.metroLabel2.Location = new System.Drawing.Point(16, 231);
             this.metroLabel2.Name = "metroLabel2";
             this.metroLabel2.Size = new System.Drawing.Size(148, 19);
             this.metroLabel2.TabIndex = 19;
@@ -290,21 +274,11 @@
             // 
             this.cboDestinationEncode.FormattingEnabled = true;
             this.cboDestinationEncode.ItemHeight = 23;
-            this.cboDestinationEncode.Location = new System.Drawing.Point(470, 258);
+            this.cboDestinationEncode.Location = new System.Drawing.Point(17, 254);
             this.cboDestinationEncode.Name = "cboDestinationEncode";
             this.cboDestinationEncode.Size = new System.Drawing.Size(226, 29);
             this.cboDestinationEncode.TabIndex = 20;
-            // 
-            // txtDestination
-            // 
-            this.txtDestination.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDestination.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.txtDestination.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
-            this.txtDestination.Location = new System.Drawing.Point(13, 255);
-            this.txtDestination.Name = "txtDestination";
-            this.txtDestination.Size = new System.Drawing.Size(414, 21);
-            this.txtDestination.TabIndex = 1;
+            this.cboDestinationEncode.UseSelectable = true;
             // 
             // MainForm
             // 
@@ -314,8 +288,6 @@
             this.Controls.Add(this.cboDestinationEncode);
             this.Controls.Add(this.metroLabel2);
             this.Controls.Add(this.btnConvertSelection);
-            this.Controls.Add(this.metroLabel1);
-            this.Controls.Add(this.btnSelectDestination);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.btnView);
             this.Controls.Add(this.statusBar);
@@ -328,7 +300,6 @@
             this.Controls.Add(lblFileMasks);
             this.Controls.Add(this.chkIncludeSubdirectories);
             this.Controls.Add(this.btnBrowseDirectories);
-            this.Controls.Add(this.txtDestination);
             this.Controls.Add(this.txtBaseDirectory);
             this.Controls.Add(lblBaseDirectory);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -362,12 +333,9 @@
         private System.Windows.Forms.Button btnView;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private MetroFramework.Controls.MetroButton btnSelectDestination;
-        private MetroFramework.Controls.MetroLabel metroLabel1;
         private MetroFramework.Controls.MetroButton btnConvertSelection;
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroComboBox cboDestinationEncode;
-        private System.Windows.Forms.TextBox txtDestination;
     }
 }
 
